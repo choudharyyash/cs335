@@ -405,6 +405,8 @@ def p_VariableInitializer(p):
     p[0] = p[1]
 
     rules_store.append(p.slice)
+
+
 def p_MethodDeclaration(p):
     '''
     MethodDeclaration : MethodHeader MethodAddParentScope MethodBody
@@ -2050,7 +2052,7 @@ def main():
     # pprint(rules_store)
     # print("...........................")
     # print(t)
-    TAC.print_tac()
+    # TAC.print_tac()
     # print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     # ST.dump_TT()
     # print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
