@@ -13,6 +13,8 @@ global_return_type = None
 global_method = None
 offset_stack = []
 offset_stack.append(0)
+break_stack = []
+continue_stack = []
 
 def p_Goal(p):
     '''Goal : CompilationUnit'''
@@ -477,7 +479,8 @@ def p_MethodDeclarator(p):
         p[0]['args'] = p[4]
     else:
         p[0]['args'] = []
-
+    break_stack.append(p[1])
+    continue_stack.append(p[1])
     # stackbegin.append(p[1])
     # stackend.append(p[1])
     if len(p) == 6:
@@ -804,6 +807,7 @@ def p_IfstartSc(p):
     '''IfstartSc : '''
     labelif = ST.ident()
     labelafterif = ST.ident()
+    # pprint(p[-2])
     TAC.emit(['ifgoto', [p[-2]['place'],0], 'eq', labelafterif])
     TAC.emit(['goto', labelif, '', ''])
     TAC.emit(['label', labelif, '', ''])
@@ -930,6 +934,8 @@ def p_WhMark1(p):
     l1 = ST.ident()
     l2 = ST.ident()
     l3 = ST.ident()
+    break_stack.append(l1)
+    continue_stack.append(l3)
     ST.create_table(l1, offset_stack[-1])
     TAC.emit(['label',l1,'',''])
     p[0]=[l1,l2,l3]
@@ -944,6 +950,8 @@ def p_WhMark3(p):
     '''WhMark3 : '''
     TAC.emit(['goto',p[-6][0],'',''])
     TAC.emit(['label',p[-6][2],'',''])
+    break_stack.pop()
+    continue_stack.pop()
     ST.scope_terminate()
 
 def p_DoStatement(p):
@@ -957,6 +965,8 @@ def p_doWhMark1(p):
     l1 = ST.ident()
     l2 = ST.ident()
     l3 = ST.ident()
+    break_stack.append(l1)
+    continue_stack.append(l3)
     ST.create_table(l1, offset_stack[-1])
     TAC.emit(['label',l1,'',''])
     p[0]=[l1,l2,l3]
@@ -972,6 +982,8 @@ def p_doWhMark2(p):
     #TAC.emit('goto',p[-3][1],'','')
     TAC.emit(['label',p[-3][1],'',''])
     ST.scope_terminate()
+    break_stack.pop()
+    continue_stack.pop()
 
 def p_ForStatement(p):
     '''
@@ -1010,6 +1022,8 @@ def p_FoMark1(p):
     l2 = ST.ident()
     l3 = ST.ident()
     l4 = ST.ident()
+    break_stack.append(l1)
+    continue_stack.append(l3)
     TAC.emit(['label',l1,'',''])
     p[0]=[l1,l2,l3,l4]
 
@@ -1035,12 +1049,16 @@ def p_FoMark3(p):
     TAC.emit(['goto',p[-7][2],'',''])
     TAC.emit(['label',p[-7][3],'',''])
     ST.scope_terminate()
+    break_stack.pop()
+    continue_stack.pop()
 
 def p_FoMark5(p):
     '''FoMark5 : '''
     TAC.emit(['goto',p[-5][0],'',''])
     TAC.emit(['label',p[-5][2],'',''])
     ST.scope_terminate()
+    break_stack.pop()
+    continue_stack.pop()
 
 def p_ForInit(p):
     '''
@@ -1068,7 +1086,7 @@ def p_BreakStatement(p):
     | BREAK STMT_TERMINATOR
     '''
     if(len(p)==3 and p[1]=='break'):
-        TAC.emit(['goto', stackend[-1], '', ''])
+        TAC.emit(['goto', continue_stack[-1], '', ''])
     rules_store.append(p.slice)
 
 def p_ContinueStatement(p):
@@ -1077,7 +1095,7 @@ def p_ContinueStatement(p):
     | CONTINUE STMT_TERMINATOR
     '''
     if(len(p)==3 and p[1]=='continue'):
-        TAC.emit(['goto', stackbegin[-1], '', ''])
+        TAC.emit(['goto', break_stack[-1], '', ''])
 #########################################################################################################################################3
 
     rules_store.append(p.slice)
@@ -1256,6 +1274,13 @@ def p_MethodInvocation(p):
                         TAC.emit(['scan',parameter['place'],'','_' + parameter['type']])
                     else:
                         TAC.emit(['scan',parameter['place'],'','_INT'])
+        elif p[1]['place'] == 'fopen':
+            if len(p) == 5:
+                for parameter in p[3]:
+                    if 'type' in parameter.keys():
+                        TAC.emit(['fopen',parameter['place'],'','_' + parameter['type']])
+                    else:
+                        TAC.emit(['fopen',parameter['place'],'','_INT'])
         else:
             temp_var = ST.temp_var()
             if len(p) == 5:
