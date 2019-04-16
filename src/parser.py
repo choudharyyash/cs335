@@ -1274,6 +1274,13 @@ def p_MethodInvocation(p):
                         TAC.emit(['scan',parameter['place'],'','_' + parameter['type']])
                     else:
                         TAC.emit(['scan',parameter['place'],'','_INT'])
+        elif p[1]['place'] == 'fopen':
+            if len(p) == 5:
+                for parameter in p[3]:
+                    if 'type' in parameter.keys():
+                        TAC.emit(['fopen',parameter['place'],'','_' + parameter['type']])
+                    else:
+                        TAC.emit(['fopen',parameter['place'],'','_INT'])
         else:
             temp_var = ST.temp_var()
             if len(p) == 5:

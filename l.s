@@ -6,75 +6,123 @@
 	inFormat:
 	.string "%d\n"
 	.global main
-Syntax Error in line 1
+odd_function:
+	push %ebp
+	mov %esp, %ebp
+	add $-512, %esp
+	mov 8(%ebp), %eax
+	mov %eax, -4(%ebp)
+	push $-1
+	push $outFormatInt
+	call printf
+	add $8, %esp
+	push -4(%ebp)
+	push $outFormatInt
+	call printf
+	add $8, %esp
+	mov -4(%ebp), %eax
+	mov $0, %ebx
+	cmp %ebx, %eax
+	je scope2
+scope1:
+	mov $0, %eax
+	mov %eax, -12(%ebp)
+	jmp scope3
+scope2:
+	mov $1, %eax
+	mov %eax, -12(%ebp)
+scope3:
+	mov -12(%ebp), %eax
+	mov $0, %ebx
+	cmp %ebx, %eax
+	je scope5
+	jmp scope4
+scope4:
+	mov $0, %eax
+	mov %eax, -8(%ebp)
+	jmp scope6
+scope5:
+	mov -4(%ebp),%ebx
+	sub $1,%ebx
+	mov %ebx, -16(%ebp)
+	push -16(%ebp)
+	call even_function
+	mov %eax, -20(%ebp)
+	add $4, %esp
+	mov -20(%ebp), %eax
+	mov %eax, -8(%ebp)
+scope6:
+	mov -8(%ebp), %eax
+	mov %ebp, %esp
+	pop %ebp
+	ret
+	mov %ebp, %esp
+	pop %ebp
+	ret
+even_function:
+	push %ebp
+	mov %esp, %ebp
+	add $-512, %esp
+	mov 8(%ebp), %eax
+	mov %eax, -4(%ebp)
+	push $-2
+	push $outFormatInt
+	call printf
+	add $8, %esp
+	push -4(%ebp)
+	push $outFormatInt
+	call printf
+	add $8, %esp
+	mov -4(%ebp), %eax
+	mov $0, %ebx
+	cmp %ebx, %eax
+	je scope8
+scope7:
+	mov $0, %eax
+	mov %eax, -12(%ebp)
+	jmp scope9
+scope8:
+	mov $1, %eax
+	mov %eax, -12(%ebp)
+scope9:
+	mov -12(%ebp), %eax
+	mov $0, %ebx
+	cmp %ebx, %eax
+	je scope11
+	jmp scope10
+scope10:
+	mov $1, %eax
+	mov %eax, -8(%ebp)
+	jmp scope12
+scope11:
+	mov -4(%ebp),%ebx
+	sub $1,%ebx
+	mov %ebx, -16(%ebp)
+	push -16(%ebp)
+	call odd_function
+	mov %eax, -20(%ebp)
+	add $4, %esp
+	mov -20(%ebp), %eax
+	mov %eax, -8(%ebp)
+scope12:
+	mov -8(%ebp), %eax
+	mov %ebp, %esp
+	pop %ebp
+	ret
+	mov %ebp, %esp
+	pop %ebp
+	ret
 main:
 	push %ebp
 	mov %esp, %ebp
 	add $-512, %esp
-	mov $5, %eax
+	push $16
+	call odd_function
 	mov %eax, -4(%ebp)
-	mov $6, %eax
-	mov $8, %ebx
-	cmp %ebx, %eax
---------------------------------------------------------------------------
-ERROR
---------------------------------------------------------------------------
-scope1:
-	mov $0, %eax
-	mov %eax, -8(%ebp)
-	jmp scope3
-scope2:
+	add $4, %esp
+	push -4(%ebp)
+	push $outFormatInt
+	call printf
+	add $8, %esp
 	mov $1, %eax
-	mov %eax, -8(%ebp)
-scope3:
-	mov $10, %eax
-	mov $-1, %ebx
-	cmp %ebx, %eax
-	je scope5
-scope4:
-	mov $0, %eax
-	mov %eax, -12(%ebp)
-	jmp scope6
-scope5:
-	mov $1, %eax
-	mov %eax, -12(%ebp)
-scope6:
-	mov -8(%ebp), %eax
-	mov %eax, -16(%ebp)
-	mov -8(%ebp), %eax
-	mov $0, %ebx
-	cmp %ebx, %eax
-	je scope7
---------------------------------------------------------------------------
-ERROR
---------------------------------------------------------------------------
-scope7:
-	mov $14,%ecx
-	mov %ecx, -20(%ebp)
-	mov $16,%ecx
-	mov %ecx, -24(%ebp)
-	mov -20(%ebp), %eax
-	mov -24(%ebp), %ebx
-	cmp %ebx, %eax
-	jg scope9
-scope8:
-	mov $0, %eax
-	mov %eax, -28(%ebp)
-	jmp scope10
-scope9:
-	mov $1, %eax
-	mov %eax, -28(%ebp)
-scope10:
-	mov -16(%ebp), %eax
-	mov %eax, -32(%ebp)
-	mov -16(%ebp), %eax
-	mov $1, %ebx
-	cmp %ebx, %eax
-	je scope11
-	mov -16(%ebp),%ebx
-	mov -28(%ebp),%eax
-	or %ebx,%eax
-	mov %ebx, -32(%ebp)
-scope11:
-	mov -32(%ebp), %eax
-	mov %eax, -4(%ebp)
+	int $0x80
