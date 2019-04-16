@@ -8,7 +8,7 @@ class short_circuit{
            System.out.println(10);
         }
 
-        if((i==0 && i==2) || i!=1)
+        if( (i==0 && i==2) || i!=1)
         {
            System.out.println(1);
         }

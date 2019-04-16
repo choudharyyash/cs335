@@ -12,20 +12,19 @@ class bubblesort {
         arr[5] = 2;
         arr[6] = 1;
         int n = 7;
-        int temp;
-        int i;
-        int j;
+        int temp,i,j;
+        // int i;
+        // int j;
         for(i=0; i < n; i++){
             for(j=1; j < (n-i); j++){
                 if(arr[j-1] > arr[j]){
-                    temp = arr[j-1];
+                    temp = arr[j-1];	
                     arr[j-1] = arr[j];
                     arr[j] = temp;
                 }
             }
         }
-        //sort(arr, 'a');//sorting array elements using bubble sort
-        for(int i=0; i < 7; i++){
+        for(i=0; i < 7; i++){
             System.out.println(arr[i]);
         }
     }

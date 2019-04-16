@@ -294,14 +294,12 @@ class TAC:
 					op1 = self.ST.find(item[1])
 					op2 = self.ST.find(item[2])
 					print("\tmov -"+str(op1['offset'])+"(%ebp),%eax")
-					print("\tmov $0, %edx")
 					print("\tmov -"+str(op2['offset'])+"(%ebp),%eax")
 					print("\tidiv %ebx")
 					print("\tmov %edx, -" + str(res_var['offset']) + "(%ebp)")
 
 
 		elif(item[3]=='&' or item[3]=="||" or item[3]=='^'):
-
 			res_var = self.ST.find(item[0])
 
 			if self.ST.find(item[1])==None:
@@ -432,7 +430,7 @@ class TAC:
 
     def emit(self,list_to_append):
         self.code.append(list_to_append)
-        # print(list_to_append)
+        print(list_to_append)
     	self.generate_assembly(list_to_append)
 
     def print_tac(self):
