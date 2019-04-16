@@ -1,35 +1,11 @@
-// public class MyBinarySearch {
-
-//     public int binarySearch(int inputArr, int len, int key) {
-//         int start = 0,
-//         int mid;
-//         int end = len - 1;
-//         // while (start <= end) {
-//         // 	System.out.println(3);
-//         //     // mid = (start + end) / 2;
-//         //     // if (key == inputArr[mid]) {
-//         //     //     return mid;
-//         //     // }
-//         //     // if (key < inputArr[mid]) {
-//         //     //     end = mid - 1;
-//         //     // } else {
-//         //     //     start = mid + 1;
-//         //     // }
-//         // }
-//         return -1;
-//     }
-//     public static void main() {
-//         //MyBinarySearch mbs = new MyBinarySearch();
-//         int arr[] = new int[8];
-//         arr[0] = 2;
-//         arr[1] = 4;
-//         arr[2] = 6;
-//         arr[3] = 8;
-//         arr[4] = 10;
-//         arr[5] = 12;
-//         arr[6] = 14;
-//         arr[7] = 16;
-//         System.out.println(binarySearch(arr, 8, 14));
+class ifib{
+    
+    int main() {
+        int [] a = new int[2];
+        a[0]=100;
+        a[1] = 200 ;
+        System.out.println(a[0]);
+        System.out.println(a[1]);
 
 //         int arr1[] = new int[6];
 //         arr1[0] = 6;
@@ -39,15 +15,6 @@
 //         arr1[4] = 432;
 //         arr1[5] = 900;
 //         System.out.println(binarySearch(arr1, 6, 431));
-//     }
-// }
-
-class uminus_bminus{
-    public static void main(){
-        int i = 10;
-        System.out.println(--i);
-        System.out.println(i--);
-        System.out.println(i-1);
-        System.out.println(-1+i);
     }
 }
+       
