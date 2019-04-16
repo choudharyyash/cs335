@@ -327,7 +327,7 @@ class TAC:
 					else:
 						print("\txor %ebx,%eax")
 
-					print("\tmov %ebx, -"+str(res_var['offset'])+"(%ebp)")
+					print("\tmov %eax, -"+str(res_var['offset'])+"(%ebp)")
 
 			else:
 
@@ -343,7 +343,7 @@ class TAC:
 					else:
 						print("\txor %ebx,%eax")
 
-					print("\tmov %ebx, -"+str(res_var['offset'])+"(%ebp)")
+					print("\tmov %eax, -"+str(res_var['offset'])+"(%ebp)")
 
 				else:
 					op1 = self.ST.find(item[1])
@@ -358,7 +358,7 @@ class TAC:
 					else:
 						print("\txor %ebx,%eax")
 
-					print("\tmov %ebx, -"+str(res_var['offset'])+"(%ebp)")
+					print("\tmov %eax, -"+str(res_var['offset'])+"(%ebp)")
 
 		elif item[3]=='=':
 			res_var = self.ST.find(item[0])
