@@ -500,7 +500,7 @@ def p_MethodDeclarator(p):
     TAC.emit(['func', p[1], '', ''])
     for arg in p[0]['args']:
         if 'is_array' in arg.keys() and arg['is_array']:
-            TAC.emit(['arg_arr', arg['place'], '', ''])
+            TAC.emit(['arg', arg['place'], '', ''])
         else:
             TAC.emit(['arg', arg['place'], '', ''])
     rules_store.append(p.slice)
@@ -1274,7 +1274,7 @@ def p_MethodInvocation(p):
                         raise Exception("Wrong type of arg passed to function %s; got %s but expected %s" %(p[1]['place'], parameter['type'], proto['type']))
                     else:
                         if 'is_array' in proto.keys() and proto['is_array']:
-                            TAC.emit(['param_arr',parameter['place'],'',''])
+                            TAC.emit(['param',parameter['place'],'',''])
                         else:
                             TAC.emit(['param',parameter['place'],'',''])
             elif 'this' in p[1].keys():
