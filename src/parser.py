@@ -4,14 +4,6 @@ import sys
 from tac import *
 from symbolt import SymbolTmap
 from pprint import pprint
-
-<<<<<<< HEAD
-parser = argparse.ArgumentParser()
-parser.add_argument("mode")
-parser.parse_args()
-
-=======
->>>>>>> bf0cc0cfae67a5b30dc2607068e25e1da5bbc9d0
 tokens = lexer.tokens
 ST = SymbolTmap()
 TAC = TAC(ST)
@@ -480,16 +472,17 @@ def p_MethodDeclarator(p):
     if len(p) == 6:
         for i in range(len(p[4])):
             parameter = p[4][i]
+            pprint(parameter)
             if 'is_array' in parameter and parameter['is_array']:
-                try:
-                    size = parameter['arr_size']
-                    tmp = p[4][i + size]
-                    dims = []
-                    for j in range(size):
-                        dims.append(p[4][i + 1 + j]['place'])
-                    offset_stack[-1] += ST.insert(parameter['place'],parameter['type'], arr=True, size_arr=dims)
-                except:
-                    raise Exception("Array passing guidelines not followed properly for arg %s" %(i))
+                # try:
+                size = parameter['arr_size']
+                tmp = p[4][i + size]
+                dims = []
+                for j in range(size):
+                    dims.append(p[4][i + 1 + j]['place'])
+                offset_stack[-1] += ST.insert(parameter['place'],parameter['type'], arr=True, size_arr=dims)
+                # except:
+                    # raise Exception("Array passing guidelines not followed properly for arg %s" %(i))
             else:
                 offset_stack[-1] += ST.insert(parameter['place'],parameter['type'])
     TAC.emit(['func', p[1], '', ''])
@@ -2001,16 +1994,11 @@ def main():
     tokens = lexer.tokens
     parser = yacc.yacc()
     global flag_mr
-<<<<<<< HEAD
-    flag_mr = False
-    inputfile = sys.argv[1]
-=======
     flag_mr = True
     inputfile = sys.argv[1]
     if len(sys.argv)>2:
         if sys.argv[2]=='-m':
             flag_mr=False
->>>>>>> bf0cc0cfae67a5b30dc2607068e25e1da5bbc9d0
     # file_out = inputfile.split('/')[-1].split('.')[0]
     code = open(inputfile, 'r').read()
     code += "\n"

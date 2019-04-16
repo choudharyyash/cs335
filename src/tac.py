@@ -15,6 +15,16 @@ class TAC:
 		elif item[0]=='arg' :
 			print("\tmov "+str(4+int(self.ST.find(item[1])['offset']))+"(%ebp), %eax")
 			print("\tmov %eax, -"+str(int(self.ST.find(item[1])['offset']))+"(%ebp)")
+		elif item[0]=='arg_arr' :
+			print("\tmov $"+str(4+int(self.ST.find(item[1])['offset']))+", %eax")
+			print("\tadd %ebp, %eax")
+			print("\tmov %eax, -"+str(int(self.ST.find(item[1])['offset']))+"(%ebp)")
+		# elif item[0]=='param_arr':
+		# 	v = self.ST.find(item[1])
+		# 	print("\tmov $-"+str(v['offset'])+", %eax")
+		# 	print("\timul $4, %eax")
+		# 	print("\tadd %ebp, %eax")
+		# 	print("\tpush %eax")
 		elif item[0]=='param':
 			v = self.ST.find(item[1])
 			if v==None:

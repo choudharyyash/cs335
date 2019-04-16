@@ -104,6 +104,7 @@ class SymbolT:
 
         if(arr):
             offset_len = size
+            # print(size_arr)
             for i in size_arr:
                 offset_len *= int(i)
             self.offset += offset_len
