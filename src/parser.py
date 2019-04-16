@@ -47,7 +47,7 @@ def p_FloatConst(p):
         'idVal' : p[1],
         'type' : 'FLOAT'
     }
-    pprint(p[0])
+    # pprint(p[0])
     rules_store.append(p.slice)
 def p_CharConst(p):
     '''
@@ -1276,11 +1276,13 @@ def p_MethodInvocation(p):
                         TAC.emit(['scan',parameter['place'],'','_INT'])
         elif p[1]['place'] == 'fopen':
             if len(p) == 5:
-                for parameter in p[3]:
-                    if 'type' in parameter.keys():
-                        TAC.emit(['fopen',parameter['place'],'','_' + parameter['type']])
-                    else:
-                        TAC.emit(['fopen',parameter['place'],'','_INT'])
+                TAC.emit(['fopen',p[3][0]['place'],p[3][1]['place'],'_INT'])
+        elif p[1]['place'] == 'fwrite':
+            if len(p) == 5:
+                TAC.emit(['fwrite',p[3][0]['place'],p[3][1]['place'],'_INT'])
+        elif p[1]['place'] == 'fread':
+            if len(p) == 5:
+                TAC.emit(['fread',p[3][0]['place'],p[3][1]['place'],'_INT'])
         else:
             temp_var = ST.temp_var()
             if len(p) == 5:
