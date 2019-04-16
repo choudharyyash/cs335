@@ -429,7 +429,7 @@ class TAC:
 
     def emit(self,list_to_append):
         self.code.append(list_to_append)
-    	#print(list_to_append)
+    	print(list_to_append)
     	self.generate_assembly(list_to_append)
 
     def print_tac(self):

@@ -33,7 +33,7 @@ class Quicksort{
                                         }
                                 }
                                 q = l;
-                                arr[tmpr] = -arr[tmpr];
+                                arr[tmpr] = 0-arr[tmpr];
                                 tmpr = q - 1;
                                 ++i;
                         }
@@ -52,7 +52,10 @@ class Quicksort{
                         tmpr = size - 1;
 
 
-                        arr[tmpr] = -arr[tmpr];
+                        arr[tmpr] = 0-arr[tmpr];
+                }
+                for(int a=0;a<size;a++){
+                        System.out.println(arr[a]);
                 }
         }
 
