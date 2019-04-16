@@ -1,62 +1,85 @@
-class Quicksort{
-        int main(){
-                int size = 8;
-                int l = 0;
-                int r = size - 1;
-                int q;
-                int i = 0;
-                int tmpr = r;
-                int[] arr = new int[8];
-                arr[0] = 12;
-                arr[1] = 14;
-                arr[2] = 16;
-                arr[3] = 18;
-                arr[4] = 1;
-                arr[5] = 2;
-                arr[6] = 4;
-                arr[7] = 6;
-                while (1) {
-                        i--;
-                        while (l < tmpr) {
-                                int pivot = arr[(l + r) / 2];
-                                while (l <= r) {
-                                        while (arr[r] > pivot)
-                                        r--;
-                                        while (arr[l] < pivot)
-                                        l++;
-                                        if (l <= r) {
-                                            int tmp = arr[r];
-                                            arr[r] = arr[l];
-                                            arr[l] = tmp;
-                                            l++;
-                                            r--;
-                                        }
-                                }
-                                q = l;
-                                arr[tmpr] = 0-arr[tmpr];
-                                tmpr = q - 1;
-                                ++i;
-                        }
-                        if (i < 0){
-                                break;
-                        }
-                        l++;
-                        tmpr = size - 1;
-                        for (int i = l; i < size; ++i) {
-                                if (arr[i] < 0){
-                                    tmpr = i;
-                                    break;
-                                }
+class quicksort{
 
-                        }
-                        tmpr = size - 1;
+    int main() {
+        int[] arr = new int[5];
+        
+        
+        
+        arr[0] = 1;
+        arr[1] = 26;
+        arr[2] = 22;
+        arr[3] = 43;
+        arr[4] = 15;
 
+        int[] stack = new int[100]; 
+  
+            // initialize top of stack 
+            int top = -1; 
+            int tmp;
+            // push initial values of l and h to stack 
+            stack[ ++top ] = 0; 
+            stack[ ++top ] = 4; 
+            int h;
+            int l;
+            // Keep popping from stack while is not empty 
+            while ( top >= 0 ) 
+            { 
+                // Pop h and l 
+                h = stack[ top ]; 
+                top = top - 1;
+                l = stack[ top ]; 
+                top = top - 1;
+                    int l1 = l;
+                    int h1 = h;
+                // Set pivot element at its correct position 
+                // in sorted array 
+                int p ;
 
-                        arr[tmpr] = 0-arr[tmpr];
-                }
-                for(int a=0;a<size;a++){
-                        System.out.println(arr[a]);
-                }
-        }
+                    int x = arr[h]; 
+                int i = (l - 1); 
+          
+                for (int j = l; j <= h- 1; j++) 
+                { 
+                    if (arr[j] <= x) 
+                    {    
+                        i++; 
+                        tmp = arr[i];
+                            arr[i] = arr[j];
+                        arr[j] = tmp;
+                        
 
-}
+                    } 
+                } 
+                tmp = arr[i + 1];
+                    arr[i + 1] = arr[h];
+                    arr[h] = tmp;
+                p =  (i + 1);  
+                    h = h1;
+                    l = l1;
+                // If there are elements on left side of pivot, 
+                // then push left side to stack 
+                if ( p-1 > l ) 
+                { 
+                    stack[ top + 1 ] = l;
+                    top = top + 1; 
+                    stack[ top + 1 ] = p - 1; 
+                    top = top + 1;
+                } 
+          
+                // If there are elements on right side of pivot, 
+                // then push right side to stack 
+                if ( p+1 < h ) 
+                { 
+                    stack[ top + 1 ] = p + 1;
+                    top = top + 1; 
+                    stack[ top + 1 ] = h;
+                    top = top + 1; 
+                } 
+            } 
+            int x; 
+            for ( x = 0; x < 5; x = x + 1 ) 
+               { System.out.println(arr[x]); }
+} 
+    
+        
+       }

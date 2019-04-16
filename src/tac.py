@@ -2,9 +2,7 @@ class TAC:
 
     def __init__(self,ST):
     	self.ST = ST
-    	# print(self.ST)
         self.code = []
-        # self.asm = []
 
     def generate_assembly(self,item):
 		if item[0]=='func' :
@@ -386,26 +384,6 @@ class TAC:
 			else:
 				print("\tmov -"+str(v2['offset'])+"(%ebp), %ebx")
 			print("\tmov %ebx, (%eax)")
-			# index = self.ST.find(item[1])
-			# v = self.ST.find(item[0])
-			# if index==None:
-			# 	print("\tmov $"+str(item[1])+", %eax")
-			# 	print("\timul $4, %eax")
-			# else:
-			# 	print("\tmov -"+str(index['offset'])+"(%ebp), %eax")
-			# 	print("\timul $4, %eax")
-			# print("\tadd %ebp, %eax")
-			# if int(v['offset'])>0:
-			# 	print("\tadd $-"+str(v['offset'])+", %eax")
-			# else:
-			# 	print("\tadd $"+str(v['offset'])+", %eax")
-			# # print("\tadd -"+str(v['offset'])+"(%ebp), %eax")
-			# v2 = self.ST.find(item[2])
-			# if v2==None:
-			# 	print("\tmov $"+str(item[2])+", %ebx")
-			# else:
-			# 	print("\tmov -"+str(v2['offset'])+"(%ebp), %ebx")
-			# print("\tmov %ebx, (%eax)")
 
 		elif item[3]=='=arr':
 			index = self.ST.find(item[2])
@@ -429,7 +407,7 @@ class TAC:
 
     def emit(self,list_to_append):
         self.code.append(list_to_append)
-    	print(list_to_append)
+    	# print(list_to_append)
     	self.generate_assembly(list_to_append)
 
     def print_tac(self):
