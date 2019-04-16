@@ -1384,6 +1384,8 @@ def p_ArrayAccess(p):
     p[0]['access_type'] = 'array'
     p[0]['name'] = p[1]['place']
     p[0]['index'] = str(index)
+    # pprint(p[0])
+    # pprint(rules_store)
     rules_store.append(p.slice)
 def p_PostfixExpression(p):
     '''
@@ -1466,7 +1468,10 @@ def p_UnaryExpression(p):
         return
     elif p[1] == '-':
         p[0] = p[2]
-        p[0]['place'] = '-' + p[2]['place']
+        t = ST.temp_var()
+        offset_stack[-1] += ST.insert(t,p[2]['type'],temp=True)
+        TAC.emit([t,'0',p[2]['place'],'-'])
+        p[0]['place'] = t
 
     rules_store.append(p.slice)
 def p_PreIncrementExpression(p):
@@ -2007,6 +2012,9 @@ def p_Assignment(p):
             raise Exception("Type Mismatch for symbol: "+ str(p[3]['place'])+str(p[3]['type']))
     else:
         # dest = p[1]['name'] + '[' + p[1]['index'] + ']'
+        # pprint(rules_store)
+        # pprint(p[1])
+        # pprint(p[3])
         TAC.emit([p[1]['name'],p[1]['index'] , p[3]['place'], 'arr='])
 
     rules_store.append(p.slice)
