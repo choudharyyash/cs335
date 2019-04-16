@@ -1,20 +1,32 @@
-class ifib{
+<<<<<<< HEAD
 
-	int func( int x){
-		int i = x;
-		return i;
-	}
+class bubblesort {
+
     int main() {
-        int[] arr1 = new int[6];
-        arr1[0] = 6;
-        arr1[1] = 34;
-        arr1[2] = 78;
-        arr1[3] = 123;
-        arr1[4] = 432;
-        arr1[5] = 900;
-        int y = 5;
-        y = func(arr1[2]) ;
-
-        	System.out.println(y);
-}
+        int[] arr = new int[7];
+        arr[0] = 7;
+        arr[1] = 6;
+        arr[2] = 5;
+        arr[3] = 4;
+        arr[4] = 3;
+        arr[5] = 2;
+        arr[6] = 1;
+        int n = 7;
+        int temp;
+        int i;
+        int j;
+        for(i=0; i < n; i++){
+            for(j=1; j < (n-i); j++){
+                if(arr[j-1] > arr[j]){
+                    temp = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+        //sort(arr, 'a');//sorting array elements using bubble sort
+        for(int i=0; i < 7; i++){
+            System.out.println(arr[i]);
+        }
+    }
 }
