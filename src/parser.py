@@ -1903,7 +1903,7 @@ def p_ConditionalAndExpression(p):
         offset_stack[-1] += ST.insert(newPlace,p[0]['type'],temp=True)
         TAC.emit([newPlace,p[1]['place'],'','='])
         TAC.emit(['ifgoto',[p[1]['place'],0],'eq',l1])
-        TAC.emit([newPlace, p[1]['place'], p[3]['place'], '&'])
+        TAC.emit([newPlace, p[1]['place'], p[3]['place'], '&&'])
         TAC.emit(['label',l1,'',''])
     else:
         raise Exception('Error: Type is not compatible' + p[1]['place'] + ',' + p[3]['place'] + '.')
@@ -1939,7 +1939,7 @@ def p_ConditionalOrExpression(p):
         ST.insert(newPlace,p[0]['type'],temp=True)
         TAC.emit([newPlace,p[1]['place'],'','='])
         TAC.emit(['ifgoto',[p[1]['place'],1],'eq',l1])
-        TAC.emit([newPlace, p[1]['place'], p[3]['place'], '|'])
+        TAC.emit([newPlace, p[1]['place'], p[3]['place'], '||'])
         TAC.emit(['label',l1,'',''])
     else:
         raise Exception('Error: Type is not compatible' + p[1]['place'] + ',' + p[3]['place'] + '.')
