@@ -65,9 +65,9 @@ class TAC:
 			elif item[2]=='neq':
 				print("\tjne "+item[3])
 			elif item[2]=='gt':
-				print("\tjg "+item[3])	
+				print("\tjg "+item[3])
 			elif item[2]=='geq':
-				print("\tjge "+item[3])	
+				print("\tjge "+item[3])
 			elif item[2]=='lt':
 				print("\tjl "+item[3])
 			elif item[2]=='lte':
@@ -214,7 +214,7 @@ class TAC:
 					print("\tmov $" + str(ax) + ", %eax")
 					print("\tidiv -" + str(op['offset'])+"(%ebp)")
 					print("\tmov %eax, -" + str(res_var['offset']) + "(%ebp)")
-					
+
 			else:
 				if self.ST.find(item[2])==None:
 					op = self.ST.find(item[1])
@@ -223,7 +223,7 @@ class TAC:
 					print("\tmov $" + item[2] +",%ebx")
 					print("\tidiv %ebx")
 					print("\tmov %eax, -" + str(res_var['offset']) + "(%ebp)")
-					
+
 				else:
 					op1 = self.ST.find(item[1])
 					op2 = self.ST.find(item[2])
@@ -250,7 +250,7 @@ class TAC:
 					print("\tmov $" + str(ax) + ", %eax")
 					print("\tidiv -" + str(op['offset'])+"(%ebp)")
 					print("\tmov %edx, -" + str(res_var['offset']) + "(%ebp)")
-					
+
 			else:
 				if self.ST.find(item[2])==None:
 					op = self.ST.find(item[1])
@@ -259,7 +259,7 @@ class TAC:
 					print("\tmov $" + item[2] +",%ebx")
 					print("\tidiv %ebx")
 					print("\tmov %edx, -" + str(res_var['offset']) + "(%ebp)")
-					
+
 				else:
 					op1 = self.ST.find(item[1])
 					op2 = self.ST.find(item[2])
@@ -301,7 +301,7 @@ class TAC:
 						print("\txor %ebx,%eax")
 
 					print("\tmov %ebx, -"+str(res_var['offset'])+"(%ebp)")
-					
+
 			else:
 
 				if self.ST.find(item[2])==None:
@@ -317,7 +317,7 @@ class TAC:
 						print("\txor %ebx,%eax")
 
 					print("\tmov %ebx, -"+str(res_var['offset'])+"(%ebp)")
-					
+
 				else:
 					op1 = self.ST.find(item[1])
 					op2 = self.ST.find(item[2])
@@ -332,7 +332,7 @@ class TAC:
 						print("\txor %ebx,%eax")
 
 					print("\tmov %ebx, -"+str(res_var['offset'])+"(%ebp)")
-					
+
 		elif item[3]=='=':
 			res_var = self.ST.find(item[0])
 			op = self.ST.find(item[1])
