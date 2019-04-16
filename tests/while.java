@@ -6,5 +6,6 @@ class Wh {
         {
 		    r++;
         }
+        System.out.println(r);
     }
 }
