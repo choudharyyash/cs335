@@ -97,6 +97,7 @@ class TAC:
 				print("\tmov %eax, -"+str(v['offset'])+"(%ebp)")
 		elif(item[0]=='adjust_rsp'):
 			print("\tadd $"+str(item[1])+", %esp")
+
 		elif(item[-1]=='+'):
 			res_var = self.ST.find(item[0])
 
@@ -125,6 +126,36 @@ class TAC:
 					print("\tmov -"+str(op1['offset'])+"(%ebp),%eax")
 					print("\tadd -"+str(op2['offset'])+"(%ebp),%eax")
 					print("\tmov %eax,-"+str(res_var['offset'])+"(%ebp)")
+
+		elif(item[-1]=='f+'):
+			res_var = self.ST.find(item[0])
+
+			if self.ST.find(item[1])==None:
+				if self.ST.find(item[2])==None:
+					val = float(item[1])+float(item[2])
+					print("\tmov $"+str(val)+",%ecx")
+					print("\tmov %ecx, -" + str(res_var['offset'])+"(%ebp)")
+				else:
+					op = self.ST.find(item[2])
+					print("\tmov -"+str(op['offset'])+"(%ebp),%eax")
+					print("\tadd $"+item[1]+",%eax")
+					print("\tmov %eax,-"+str(res_var['offset'])+"(%ebp)")
+
+			else:
+				if self.ST.find(item[2])==None:
+					op = self.ST.find(item[1])
+					print("\tmov -"+str(op['offset'])+"(%ebp),%ebx")
+					print("\tadd $"+item[2]+",%ebx")
+					print("\tmov %ebx, -" + str(res_var['offset']) + "(%ebp)")
+
+
+				else:
+					op1 = self.ST.find(item[1])
+					op2 = self.ST.find(item[2])
+					print("\tmov -"+str(op1['offset'])+"(%ebp),%eax")
+					print("\tadd -"+str(op2['offset'])+"(%ebp),%eax")
+					print("\tmov %eax,-"+str(res_var['offset'])+"(%ebp)")
+
 
 		elif(item[-1]=='-'):
 
@@ -193,9 +224,18 @@ class TAC:
 
 			if self.ST.find(item[1])==None:
 				if self.ST.find(item[2])==None:
-					val = int(item[1])/int(item[2])
-					print("\tmov $"+str(val)+",%ecx")
-					print("\tmov %ecx, -" + str(res_var['offset'])+"(%ebp)")
+					if(int(item[2]) == 0):
+						print("\tmov $0, %ebx")
+						dx = int(item[1])>>32
+						ax = ((int(item[1])<<32)>>32)
+						print("\tmov $" + str(dx) + ", %edx")
+						print("\tmov $" + str(ax) + ", %eax")
+						print("\tidiv %ebx")
+						print("\tmov %eax, -" + str(res_var['offset']) + "(%ebp)")
+					else:
+						print("\tmov $"+str(val)+",%ecx")
+						print("\tmov %ecx, -" + str(res_var['offset'])+"(%ebp)")
+						
 				else:
 					op = self.ST.find(item[2])
 					dx = int(item[1])>>32
