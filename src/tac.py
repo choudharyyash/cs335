@@ -60,11 +60,12 @@ class TAC:
 				print("\tjge "+item[3])
 			elif item[2]=='lt':
 				print("\tjl "+item[3])
-			elif item[2]=='lte':
+			elif item[2]=='leq':
 				print("\tjle "+item[3])
 			else:
 				print("--------------------------------------------------------------------------")
 				print("ERROR 2")
+				print(item[2])
 				print("--------------------------------------------------------------------------")
 		elif(item[0]=='goto'):
 			print("\tjmp "+item[1])
