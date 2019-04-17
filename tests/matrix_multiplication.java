@@ -4,28 +4,6 @@ class matrix_multiplication{
         int i;
     	int j;
         int k;
-        // int x = 6;
-        // System.out.println(x);
-        // System.in.scanln(x);
-        // System.out.println(x);
-
-
-        // int [] arr = new int[5];
-        // arr[0] = 1;
-        // // arr[1] = 2;
-        // arr[2] = 3;
-        // // arr[3] = 4;
-        // // arr[4] = 5;
-        // System.out.println(arr[0]);
-        // System.out.println(arr[1]);
-        // System.out.println(arr[2]);
-        // System.out.println(arr[3]);
-        // System.out.println(arr[4]);
-
-        // for(int i=0;i<5;i++){
-        //     System.out.println(arr[i]);
-        // }
-
         int[][] firstarray = new int[3][3];
         int[][] secondarray = new int[3][3];
         int[][] result = new int[3][3];
@@ -50,20 +28,13 @@ class matrix_multiplication{
 
         secondarray[2][2] = 18;
 
-        /* Create another 2d array to store the result using the original arrays' lengths on row and column respectively. */
 
         for (i = 0; i < 3; i++) {
             for (k = 0; k < 3; k++) {
                 result[i][k] = 0;
-                // System.out.println(firstarray[i][k]);
             }
         }
-        // for (i = 0; i < 3; i++) {
-        //     for (k = 0; k < 3; k++) {
-        //         System.out.println(result[i][k]);
-        //     }
-        // }
-        /* Loop through each and get product, then sum up and store the value */
+        
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 3; j++) {
                 for (k = 0; k < 3; k++) {
@@ -72,7 +43,6 @@ class matrix_multiplication{
             }
         }
 
-        /* Show the result */
         for (i = 0; i < 3; i++) {
             for (k = 0; k < 3; k++) {
                 System.out.println(result[i][k]);
