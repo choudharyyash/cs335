@@ -3,7 +3,7 @@ class mutual_recursion{
 
     int odd_function(int n){
         int odd;
-	
+
         if (n==0){
             odd = 0;
         }
@@ -14,7 +14,7 @@ class mutual_recursion{
     }
     int even_function(int n){
         int even;
-	
+
         if (n==0){
             even = 1;
         }
